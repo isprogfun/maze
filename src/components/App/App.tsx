@@ -11,6 +11,9 @@ export default function App() {
   const [mazeId, setMazeId] = useState("");
 
   function onSetGameState(gameState: GAME_STATE) {
+    if (gameState === GAME_STATE.Initial) {
+      setPonyName("");
+    }
     setGameState(gameState);
   }
 
@@ -44,7 +47,7 @@ export default function App() {
           {gameState !== GAME_STATE.Initial && (
             <button
               type="button"
-              onClick={() => setGameState(GAME_STATE.Initial)}
+              onClick={() => onSetGameState(GAME_STATE.Initial)}
             >
               Start again
             </button>
