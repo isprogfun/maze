@@ -3,7 +3,11 @@
 I've used Create React App with TypeScript to write this application. Also tried Tailwind to style and think it went well enough.
 There is no state management as this app is relatively simple to just pass props and callback between components but this would be one of the first improvements.
 
-This app is also missing some UX improvements, like, meaningfull errors in case of api/network problems. I've also skipped the feature to choose maze dimensions and difficulty, only a pony name is on the initial screen.
+This app is also missing some UX improvements, like, meaningfull errors in case of api/network problems, spinners.
+
+I've also skipped the feature to choose maze dimensions and difficulty, only a pony name is on the initial screen.
+
+I've seen the possibility to eliminate unnecessary api requests with moves with frontend validations (we have full maze structure), but added only simple array of blocked directions based on the move api response.
 
 # Getting Started with Create React App
 

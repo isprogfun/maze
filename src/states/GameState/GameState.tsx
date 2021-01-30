@@ -9,6 +9,7 @@ import { GAME_STATE } from "../../components/App/types";
 
 export default function GameState(props: GameStateProps) {
   const [mazeView, setMazeView] = useState();
+  const [blockedDirections, setBlockedDirections] = useState<DIRECTION[]>([]);
 
   const onKeyDown = (event: KeyboardEvent) => {
     switch (event.code) {
@@ -27,6 +28,31 @@ export default function GameState(props: GameStateProps) {
     }
   };
 
+  const updateMazeView = async () => {
+    const data = await getCurrentMazeView(props.mazeId);
+
+    setMazeView(data);
+  };
+
+  const makeMove = async (direction: DIRECTION) => {
+    if (blockedDirections.includes(direction)) {
+      return;
+    }
+
+    const data = await makeMoveInCurrentMaze(props.mazeId, direction);
+
+    if (data?.["state-result"] === MOVE_RESULTS.MoveAccepted) {
+      setBlockedDirections([]);
+      updateMazeView();
+    } else if (data?.["state-result"] === MOVE_RESULTS.YouWon) {
+      props.onSetGameState(GAME_STATE.GameWin);
+    } else if (data?.["state-result"] === MOVE_RESULTS.YouLost) {
+      props.onSetGameState(GAME_STATE.GameOver);
+    } else if (data?.["state-result"] === MOVE_RESULTS.CantWalk) {
+      setBlockedDirections(blockedDirections.concat([direction]));
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
 
@@ -35,25 +61,9 @@ export default function GameState(props: GameStateProps) {
     };
   });
 
-  const updateMazeView = async () => {
-    const data = await getCurrentMazeView(props.mazeId);
-
-    setMazeView(data);
-  };
-
-  const makeMove = async (direction: DIRECTION) => {
-    const data = await makeMoveInCurrentMaze(props.mazeId, direction);
-
-    if (data?.["state-result"] === MOVE_RESULTS.MoveAccepted) {
-      updateMazeView();
-    } else if (data?.["state-result"] === MOVE_RESULTS.YouWon) {
-      props.onSetGameState(GAME_STATE.GameWin);
-    } else if (data?.["state-result"] === MOVE_RESULTS.YouLost) {
-      props.onSetGameState(GAME_STATE.GameOver);
-    }
-  };
-
-  updateMazeView();
+  useEffect(() => {
+    updateMazeView();
+  }, []);
 
   return (
     <div>
