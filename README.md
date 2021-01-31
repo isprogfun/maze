@@ -1,9 +1,9 @@
 # Description
 
 I've used Create React App with TypeScript to write this application. Also tried Tailwind to style and think it went well enough.
-There is no state management as this app is relatively simple to just pass props and callback between components but this would be one of the first improvements. I've added cypress and some basic tests to check the app state.
+There is no state management as this app is relatively simple to just pass props and callbacks between components but this would be one of the first improvements. I've added cypress and some basic tests to check the app state but this could be greatly improved too.
 
-Spinners and erros could be improved as well as the overall UX experience.
+Spinners and erros could be done better as well as the overall UX experience.
 
 I've also skipped the feature to choose maze dimensions and difficulty, only a pony name is on the initial screen.
 
