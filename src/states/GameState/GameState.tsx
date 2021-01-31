@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   DIRECTION,
   getCurrentMazeView,
@@ -33,7 +33,7 @@ export default function GameState(props: GameStateProps) {
     }
   };
 
-  const updateMazeView = async () => {
+  const updateMazeView = useCallback(async () => {
     const data = await getCurrentMazeView(props.mazeId);
 
     if (data) {
@@ -41,7 +41,7 @@ export default function GameState(props: GameStateProps) {
     } else {
       alert("Error getting maze view, start again");
     }
-  };
+  }, [props.mazeId]);
 
   const makeMove = async (direction: DIRECTION) => {
     setIsLoading(true);
@@ -80,7 +80,7 @@ export default function GameState(props: GameStateProps) {
 
   useEffect(() => {
     updateMazeView();
-  }, []);
+  }, [updateMazeView]);
 
   return (
     <div className="cy-game-state">
