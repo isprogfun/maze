@@ -6,9 +6,14 @@ export default function InitialState(props: InitialStateProps) {
   const ponyNames = Object.values(PONY_NAMES);
 
   const [ponyName, setPonyName] = useState<PONY_NAMES>(ponyNames[0]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onButtonClick = async () => {
+    setIsLoading(true);
+
     const data = await createMaze(ponyName);
+
+    setIsLoading(false);
 
     if (data?.maze_id) {
       props.onStartGame(data?.maze_id, ponyName);
@@ -26,7 +31,7 @@ export default function InitialState(props: InitialStateProps) {
       <h2 className="mb-4">
         Choose a pony name and press a button to begin a game
       </h2>
-      <div>
+      <div className="relative">
         <select
           onChange={onSelectChange}
           className="cy-initial-state-select-name mr-8"
@@ -41,6 +46,14 @@ export default function InitialState(props: InitialStateProps) {
         >
           Start game
         </button>
+        {isLoading && (
+          <div className="absolute w-full h-full flex justify-center items-center top-0 bg-purple-600 bg-opacity-25">
+            <div
+              className="w-8 h-8 border-8 border-purple-600 rounded-full loader animate-spin"
+              style={{ borderRightColor: "transparent" }}
+            ></div>
+          </div>
+        )}
       </div>
     </div>
   );
