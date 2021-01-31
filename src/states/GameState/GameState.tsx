@@ -66,8 +66,8 @@ export default function GameState(props: GameStateProps) {
   }, []);
 
   return (
-    <div>
-      <div className="flex flex-col items-center">
+    <div className="cy-game-state">
+      <div className="cy-game-state-actions flex flex-col items-center">
         <span>Use buttons or arrow keys to move your pony</span>
         <button onClick={() => makeMove(DIRECTION.north)}>↑</button>
         <div>

@@ -25,7 +25,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "cypress run",
+    "cypress:open": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^6.3.0",
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1"
   }

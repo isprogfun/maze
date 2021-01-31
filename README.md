@@ -1,7 +1,7 @@
 # Description
 
 I've used Create React App with TypeScript to write this application. Also tried Tailwind to style and think it went well enough.
-There is no state management as this app is relatively simple to just pass props and callback between components but this would be one of the first improvements.
+There is no state management as this app is relatively simple to just pass props and callback between components but this would be one of the first improvements. I've added cypress and some basic tests to check the app state.
 
 This app is also missing some UX improvements, like, meaningfull errors in case of api/network problems, spinners.
 

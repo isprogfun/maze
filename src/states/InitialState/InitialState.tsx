@@ -13,7 +13,7 @@ export default function InitialState(props: InitialStateProps) {
     if (data?.maze_id) {
       props.onStartGame(data?.maze_id, ponyName);
     } else {
-      // TODO: show error
+      alert("Error creating maze, try again");
     }
   };
 
@@ -22,17 +22,25 @@ export default function InitialState(props: InitialStateProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="cy-initial-state flex flex-col items-center justify-center h-full">
       <h2 className="mb-4">
         Choose a pony name and press a button to begin a game
       </h2>
       <div>
-        <select onChange={onSelectChange} className="mr-8">
+        <select
+          onChange={onSelectChange}
+          className="cy-initial-state-select-name mr-8"
+        >
           {ponyNames.map((name) => {
             return <option key={name}>{name}</option>;
           })}
         </select>
-        <button onClick={onButtonClick}>Start game</button>
+        <button
+          className="cy-initial-state-button-start"
+          onClick={onButtonClick}
+        >
+          Start game
+        </button>
       </div>
     </div>
   );
